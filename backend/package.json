@@ -1,0 +1,19 @@
+{
+  "name": "infrawatch-backend",
+  "version": "1.0.0",
+  "description": "INFRA WATCH — WebSocket backend for real-time server metrics",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "systeminformation": "^5.21.20",
+    "ws": "^8.16.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}

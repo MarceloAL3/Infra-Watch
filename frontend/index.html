@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INFRA WATCH</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════
+       HEADER
+  ══════════════════════════════════ -->
+  <header>
+    <div class="logo">INFRA <span>WATCH</span></div>
+
+    <div class="live-badge">
+      <div class="live-dot"></div>
+      LIVE
+    </div>
+
+    <div class="server-info">
+      <span id="hostname">—</span>
+      <span class="sep">|</span>
+      <span id="distro">—</span>
+      <span class="sep">|</span>
+      <span id="uptime">—</span>
+    </div>
+
+    <div class="hw-info">
+      <span id="cpu-speed">—</span>
+      <span class="sep">|</span>
+      <span id="mem-total">—</span>
+      <span class="sep">|</span>
+      <span id="disk-total">—</span>
+    </div>
+
+    <div class="ws-status" id="ws-status">⬤ CONNECTING</div>
+  </header>
+
+  <!-- ══════════════════════════════════
+       DASHBOARD
+  ══════════════════════════════════ -->
+  <div class="dashboard">
+
+    <!-- MÉTRICAS -->
+    <div class="metrics-row">
+
+      <div class="metric-card cpu">
+        <div class="card-header">
+          <div class="card-icon icon-diamond"></div>CPU LOAD
+        </div>
+        <div class="metric-value"><span id="cpu-val">—</span><sup>%</sup></div>
+        <div class="metric-limits" id="cpu-lim">— / 90%</div>
+        <div class="progress-track">
+          <div class="progress-fill amber" id="cpu-bar" style="width:0%"></div>
+          <div class="progress-marker" style="left:90%"></div>
+        </div>
+      </div>
+
+      <div class="metric-card mem">
+        <div class="card-header">
+          <div class="card-icon icon-square"></div>MEMORY
+        </div>
+        <div class="metric-value"><span id="mem-val">—</span><sup>%</sup></div>
+        <div class="metric-limits" id="mem-lim">— / 80%</div>
+        <div class="progress-track">
+          <div class="progress-fill cyan" id="mem-bar" style="width:0%"></div>
+          <div class="progress-marker" style="left:80%"></div>
+        </div>
+      </div>
+
+      <div class="metric-card disk">
+        <div class="card-header">
+          <div class="card-icon icon-circle-amber"></div>DISK USAGE
+        </div>
+        <div class="metric-value"><span id="disk-val">—</span><sup>%</sup></div>
+        <div class="metric-limits" id="disk-lim">— / 85%</div>
+        <div class="progress-track">
+          <div class="progress-fill amber" id="disk-bar" style="width:0%"></div>
+          <div class="progress-marker" style="left:85%"></div>
+        </div>
+      </div>
+
+      <div class="metric-card temp">
+        <div class="card-header">
+          <div class="card-icon icon-circle-green"></div>TEMPERATURE
+        </div>
+        <div class="metric-value"><span id="temp-val">—</span><sup>°C</sup></div>
+        <div class="metric-limits" id="temp-lim">— / 80°C</div>
+        <div class="progress-track">
+          <div class="progress-fill green" id="temp-bar" style="width:0%"></div>
+          <div class="progress-marker" style="left:94.1%"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PROCESSOS -->
+    <div class="processes-panel">
+      <div class="panel-header">
+        <div class="card-icon icon-diamond"></div>TOP PROCESSES
+      </div>
+      <table class="processes-table">
+        <thead>
+          <tr>
+            <th>PID</th>
+            <th>NAME</th>
+            <th>CPU%</th>
+            <th>MEM%</th>
+          </tr>
+        </thead>
+        <tbody id="proc-body">
+          <tr><td colspan="4" class="empty-row">Aguardando dados...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- WAVEFORM -->
+    <div class="waveform-panel">
+      <div class="waveform-header">
+        <div class="waveform-dot"></div>
+        RESOURCE WAVEFORM
+        <div class="waveform-legends">
+          <div class="legend">
+            <div class="legend-line amber"></div>
+            <span class="amber-text">CPU</span>
+          </div>
+          <div class="legend">
+            <div class="legend-line cyan"></div>
+            <span class="cyan-text">MEM</span>
+          </div>
+        </div>
+      </div>
+      <canvas id="waveform" height="200"></canvas>
+      <div class="waveform-footer">
+        <span class="axis-label">TIME (s)</span>
+      </div>
+    </div>
+
+    <!-- ALERT LOG -->
+    <div class="alert-panel">
+      <div class="alert-header">
+        <div class="alert-dot"></div>
+        ALERT LOG
+        <div class="alert-count" id="alert-count">[0]</div>
+      </div>
+      <div id="alert-list">
+        <div class="alert-cursor">
+          &gt; _ awaiting events<span class="cursor-blink">█</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /dashboard -->
+
+  <script src="js/waveform.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/socket.js"></script>
+</body>
+</html>
